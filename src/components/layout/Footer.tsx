@@ -1,5 +1,4 @@
 import { Link } from 'react-router-dom'
-import { FiMail, FiMessageCircle } from 'react-icons/fi'
 import { FaTelegram, FaTwitter, FaInstagram, FaDiscord } from 'react-icons/fa'
 
 const footerLinks = {

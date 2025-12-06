@@ -48,15 +48,15 @@ const sportsCategories = [
   { name: 'ICE HOCKEY', icon: '🏒' },
 ]
 
-// Game providers
-const gameProviders = [
-  { name: 'PRAGMATIC PLAY', games: 478 },
-  { name: 'HACKSAW', games: 113 },
-  { name: 'ENDORPHINA', games: 188 },
-  { name: 'BGAMING', games: 170 },
-  { name: 'PLATIPUS', games: 166 },
-  { name: 'BELATRA', games: 111 },
-]
+// Game providers (commented out - currently unused)
+// const gameProviders = [
+//   { name: 'PRAGMATIC PLAY', games: 478 },
+//   { name: 'HACKSAW', games: 113 },
+//   { name: 'ENDORPHINA', games: 188 },
+//   { name: 'BGAMING', games: 170 },
+//   { name: 'PLATIPUS', games: 166 },
+//   { name: 'BELATRA', games: 111 },
+// ]
 
 // Leaderboard data from Figma
 const leaderboardData = [
@@ -86,7 +86,7 @@ const sampleGames: Game[] = [
 export default function Home() {
   const [activeTab, setActiveTab] = useState('lobby')
   const [games, setGames] = useState<Game[]>(sampleGames)
-  const [loading, setLoading] = useState(false)
+  const [loading] = useState(false)
   const [searchQuery, setSearchQuery] = useState('')
 
   // Fetch games from API (optional - keep sample games as fallback)
@@ -108,12 +108,13 @@ export default function Home() {
   const originalGames = games.filter(g => g.isHot).slice(0, 6)
   const slotGamesData = games.filter(g => g.category === 'mmorpg' || g.category === 'slots').slice(0, 6)
   const newGamesData = games.filter(g => g.isNew).slice(0, 6)
-  const liveWinsGames = games.slice(0, 8)
+  // Live wins games (commented out - currently unused)
+  // const liveWinsGames = games.slice(0, 8)
   
-  // Filter games by search
-  const filteredGames = searchQuery 
-    ? games.filter(g => g.name.toLowerCase().includes(searchQuery.toLowerCase()))
-    : games
+  // Filter games by search (commented out - currently unused)
+  // const filteredGames = searchQuery 
+  //   ? games.filter(g => g.name.toLowerCase().includes(searchQuery.toLowerCase()))
+  //   : games
 
   return (
     <div className="space-y-5">
@@ -661,19 +662,19 @@ function GameCard({ game }: { game: Game }) {
   )
 }
 
-// Promotion Card
-function PromotionCard({ title, subtitle, gradient, border }: { title: string; subtitle: string; gradient: string; border: string }) {
-  return (
-    <div className={`bg-gradient-to-br ${gradient} rounded-xl p-4 border ${border}`}>
-      <h3 className="text-white font-bold text-sm mb-1">{title}</h3>
-      <p className="text-[#7D8CA3] text-xs mb-3">{subtitle}</p>
-      <div className="flex gap-2">
-        <button className="px-3 py-1.5 bg-[#1C2333] text-white text-xs rounded-lg hover:bg-[#252D3D]">Read More</button>
-        <button className="px-3 py-1.5 text-white text-xs rounded-lg" style={{ background: 'linear-gradient(135deg, #0EA5E9 0%, #0284C7 100%)' }}>Get Bonus</button>
-      </div>
-    </div>
-  )
-}
+// Promotion Card (commented out - currently unused)
+// function PromotionCard({ title, subtitle, gradient, border }: { title: string; subtitle: string; gradient: string; border: string }) {
+//   return (
+//     <div className={`bg-gradient-to-br ${gradient} rounded-xl p-4 border ${border}`}>
+//       <h3 className="text-white font-bold text-sm mb-1">{title}</h3>
+//       <p className="text-[#7D8CA3] text-xs mb-3">{subtitle}</p>
+//       <div className="flex gap-2">
+//         <button className="px-3 py-1.5 bg-[#1C2333] text-white text-xs rounded-lg hover:bg-[#252D3D]">Read More</button>
+//         <button className="px-3 py-1.5 text-white text-xs rounded-lg" style={{ background: 'linear-gradient(135deg, #0EA5E9 0%, #0284C7 100%)' }}>Get Bonus</button>
+//       </div>
+//     </div>
+//   )
+// }
 
 // Navigation Arrows
 function NavArrows() {

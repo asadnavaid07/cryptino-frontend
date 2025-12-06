@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react'
-import { FiDownload, FiCalendar, FiDollarSign, FiUsers, FiTrendingUp, FiActivity } from 'react-icons/fi'
+import { FiDownload, FiDollarSign, FiUsers, FiTrendingUp } from 'react-icons/fi'
 import { supabase } from '../../lib/supabase'
 
 interface ReportData {
@@ -16,7 +16,7 @@ interface ReportData {
 export default function Reports() {
   const [dateRange, setDateRange] = useState({ from: '', to: '' })
   const [reportType, setReportType] = useState('overview')
-  const [loading, setLoading] = useState(false)
+  const [, setLoading] = useState(false)
   const [reportData, setReportData] = useState<ReportData>({
     totalUsers: 0,
     totalDeposits: 0,
@@ -41,11 +41,12 @@ export default function Reports() {
         .select('*', { count: 'exact', head: true })
 
       // Fetch total wallet balance (as proxy for deposits)
-      const { data: wallets } = await supabase
+      const { data: _wallets } = await supabase
         .from('wallets')
         .select('balance')
 
-      const totalBalance = wallets?.reduce((sum, w) => sum + Number(w.balance), 0) || 0
+      // Calculate total balance (currently unused but kept for future use)
+      // const totalBalance = _wallets?.reduce((sum, w) => sum + Number(w.balance), 0) || 0
 
       setReportData({
         totalUsers: userCount || 0,
@@ -64,7 +65,7 @@ export default function Reports() {
     }
   }
 
-  const exportReport = (format: 'csv' | 'pdf') => {
+  const exportReport = (_format: 'csv' | 'pdf') => {
     // Create CSV data
     const csvContent = `
 Report Type,${reportType}

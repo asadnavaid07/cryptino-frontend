@@ -1,7 +1,24 @@
 import { useState } from 'react'
 import { FiSearch, FiStar, FiTrendingUp, FiClock } from 'react-icons/fi'
 
-const liveMatches = [
+interface Team {
+  name: string
+  logo: string
+  score?: number
+}
+
+interface Match {
+  id: string
+  league: string
+  leagueIcon: string
+  team1: Team
+  team2: Team
+  time: string
+  isLive: boolean
+  odds: { home: string; draw: string; away: string }
+}
+
+const liveMatches: Match[] = [
   {
     id: '1',
     league: 'Premier League',
@@ -44,7 +61,7 @@ const liveMatches = [
   },
 ]
 
-const upcomingMatches = [
+const upcomingMatches: Match[] = [
   {
     id: '5',
     league: 'Champions League',
@@ -327,12 +344,12 @@ export default function Sports() {
                     <div className="flex items-center gap-3 mb-2">
                       <span className="text-2xl">{match.team1.logo}</span>
                       <span className="text-white font-medium">{match.team1.name}</span>
-                      {match.isLive && 'score' in match.team1 && <span className="text-xl font-bold text-white ml-auto">{match.team1.score}</span>}
+                      {match.isLive && match.team1.score !== undefined && <span className="text-xl font-bold text-white ml-auto">{match.team1.score}</span>}
                     </div>
                     <div className="flex items-center gap-3">
                       <span className="text-2xl">{match.team2.logo}</span>
                       <span className="text-white font-medium">{match.team2.name}</span>
-                      {match.isLive && 'score' in match.team2 && <span className="text-xl font-bold text-white ml-auto">{match.team2.score}</span>}
+                      {match.isLive && match.team2.score !== undefined && <span className="text-xl font-bold text-white ml-auto">{match.team2.score}</span>}
                     </div>
                   </div>
 

@@ -1,5 +1,5 @@
 import { useState } from 'react'
-import { FiSearch, FiPlus, FiDollarSign } from 'react-icons/fi'
+import { FiSearch, FiDollarSign } from 'react-icons/fi'
 import Button from '../../components/ui/Button'
 import Input from '../../components/ui/Input'
 import Modal from '../../components/ui/Modal'

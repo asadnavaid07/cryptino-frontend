@@ -1,5 +1,5 @@
 import { useState } from 'react'
-import { FiCopy, FiCheck, FiArrowDownLeft, FiArrowUpRight, FiClock, FiDollarSign } from 'react-icons/fi'
+import { FiCopy, FiCheck, FiArrowDownLeft, FiArrowUpRight, FiClock } from 'react-icons/fi'
 import { useAuth } from '../../hooks/useAuth'
 
 const cryptoOptions = [

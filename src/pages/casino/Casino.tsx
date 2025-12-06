@@ -42,7 +42,7 @@ export default function Casino() {
   const [loading, setLoading] = useState(true)
   const [activeTab, setActiveTab] = useState('lobby')
   const [search, setSearch] = useState('')
-  const [selectedProvider, setSelectedProvider] = useState('all')
+  const [selectedProvider] = useState('all') // eslint-disable-line @typescript-eslint/no-unused-vars
 
   // Fetch games from API
   useEffect(() => {

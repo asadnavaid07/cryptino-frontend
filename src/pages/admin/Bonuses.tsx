@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react'
+import { useState } from 'react'
 import { FiPlus, FiEdit2, FiTrash2, FiGift, FiPercent, FiDollarSign, FiClock } from 'react-icons/fi'
 
 interface Bonus {

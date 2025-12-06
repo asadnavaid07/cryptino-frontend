@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react'
-import { FiPlus, FiEdit2, FiTrash2, FiSearch, FiFilter, FiStar, FiTrendingUp, FiZap } from 'react-icons/fi'
+import { FiPlus, FiEdit2, FiTrash2, FiSearch, FiStar, FiTrendingUp, FiZap } from 'react-icons/fi'
 import { supabase } from '../../lib/supabase'
 
 interface Game {

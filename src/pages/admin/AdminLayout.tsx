@@ -25,7 +25,7 @@ const adminMenu = [
 ]
 
 export default function AdminLayout() {
-  const { profile, isAdmin } = useAuth()
+  const { isAdmin } = useAuth()
   const location = useLocation()
 
   // Redirect non-admins

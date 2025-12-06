@@ -1,4 +1,4 @@
-import { FiUsers, FiDollarSign, FiPlay, FiTrendingUp, FiTrendingDown } from 'react-icons/fi'
+import { FiUsers, FiDollarSign, FiPlay, FiTrendingUp } from 'react-icons/fi'
 import { 
   LineChart, 
   Line, 

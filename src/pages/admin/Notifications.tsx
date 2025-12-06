@@ -1,5 +1,5 @@
 import { useState } from 'react'
-import { FiPlus, FiSend, FiTrash2, FiBell, FiMail, FiSmartphone, FiUsers, FiUser } from 'react-icons/fi'
+import { FiPlus, FiSend, FiTrash2, FiBell, FiMail, FiSmartphone, FiUsers } from 'react-icons/fi'
 
 interface Notification {
   id: string

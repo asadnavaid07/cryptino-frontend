@@ -1,5 +1,5 @@
 import { useState } from 'react'
-import { FiClock, FiUsers, FiDollarSign, FiAward, FiChevronRight } from 'react-icons/fi'
+import { FiUsers, FiDollarSign, FiAward, FiChevronRight } from 'react-icons/fi'
 
 const tournaments = [
   {

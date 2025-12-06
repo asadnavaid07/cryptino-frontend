@@ -1,5 +1,4 @@
 import { useState } from 'react'
-import { FiBitcoin } from 'react-icons/fi'
 
 interface Challenge {
   id: string

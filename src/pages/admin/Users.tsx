@@ -1,5 +1,5 @@
 import { useState } from 'react'
-import { FiSearch, FiPlus, FiEdit, FiTrash, FiMoreVertical } from 'react-icons/fi'
+import { FiSearch, FiPlus, FiEdit, FiTrash } from 'react-icons/fi'
 import Button from '../../components/ui/Button'
 import Input from '../../components/ui/Input'
 import Modal from '../../components/ui/Modal'

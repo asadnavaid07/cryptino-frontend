@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react'
-import { FiSearch, FiFilter, FiDownload, FiShield, FiAlertTriangle, FiInfo, FiUser, FiLogIn, FiLogOut, FiDollarSign, FiSettings, FiRefreshCw } from 'react-icons/fi'
+import { FiSearch, FiDownload, FiShield, FiAlertTriangle, FiInfo, FiUser, FiLogIn, FiLogOut, FiDollarSign, FiSettings, FiRefreshCw } from 'react-icons/fi'
 
 interface SecurityLog {
   id: string
