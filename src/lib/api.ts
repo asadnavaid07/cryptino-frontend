@@ -52,6 +52,8 @@ export const walletApi = {
 export const reportsApi = {
   getSummary: () => api.get('/reports/summary'),
   
+  getDashboard: () => api.get('/reports/dashboard'),
+  
   getTransactions: (params?: { startDate?: string; endDate?: string }) =>
     api.get('/reports/transactions', { params }),
 }

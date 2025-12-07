@@ -12,6 +12,7 @@ interface Game {
   provider: string
   category: string
   thumbnail: string
+  game_url?: string
   isHot?: boolean
   isNew?: boolean
 }
@@ -652,9 +653,15 @@ function GameCard({ game }: { game: Game }) {
 
         {hovered && (
           <div className="absolute inset-0 bg-black/60 flex items-center justify-center">
-            <button className="px-5 py-2 text-white text-sm font-semibold rounded-lg shadow-lg" style={{ background: 'linear-gradient(135deg, #0EA5E9 0%, #0284C7 100%)' }}>
+            <a 
+              href={game.game_url || '#'} 
+              target="_blank" 
+              rel="noopener noreferrer"
+              className="px-5 py-2 text-white text-sm font-semibold rounded-lg shadow-lg" 
+              style={{ background: 'linear-gradient(135deg, #0EA5E9 0%, #0284C7 100%)' }}
+            >
               Play Now
-            </button>
+            </a>
           </div>
         )}
       </div>

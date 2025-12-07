@@ -5,6 +5,7 @@ import { FcGoogle } from 'react-icons/fc'
 import { SiApple, SiBitcoin, SiEthereum, SiLitecoin } from 'react-icons/si'
 import { FaTelegram } from 'react-icons/fa'
 import { useAuth } from '../../hooks/useAuth'
+import { supabase } from '../../lib/supabase'
 
 export default function Signup() {
   const [fullName, setFullName] = useState('')
@@ -24,8 +25,20 @@ export default function Signup() {
   useEffect(() => {
     if (user) {
       navigate('/')
+      // Hard refresh to ensure all data loads correctly
+      window.location.reload()
     }
   }, [user, navigate])
+  
+  // Watch for user state changes after signup
+  useEffect(() => {
+    if (user && !loading) {
+      // User is logged in and loading is done, navigate to home
+      navigate('/')
+      // Hard refresh to ensure all data loads correctly
+      window.location.reload()
+    }
+  }, [user, loading, navigate])
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault()
@@ -48,13 +61,41 @@ export default function Signup() {
 
     setLoading(true)
 
-    const { error } = await signUp(email, password, fullName)
-    
-    if (error) {
-      setError(error.message)
+    try {
+      const { error } = await signUp(email, password, fullName)
+      
+      if (error) {
+        setError(error.message)
+        setLoading(false)
+        return
+      }
+
+      // Signup successful - check if user is immediately logged in
+      // (Supabase might require email confirmation, so user might not be logged in yet)
+      const { data: { session } } = await supabase.auth.getSession()
+      
+      if (session?.user) {
+        // User is immediately logged in (email confirmation disabled)
+        // Give the auth context a moment to update, then navigate
+        setLoading(false)
+        
+        // Wait a bit for auth state to propagate through context
+        setTimeout(() => {
+          // Navigate to home and hard refresh to ensure all data loads
+          navigate('/')
+          window.location.reload()
+        }, 500)
+      } else {
+        // Email confirmation required - show success message
+        setLoading(false)
+        // Show success message
+        alert('Account created successfully! Please check your email to confirm your account.')
+        navigate('/login')
+      }
+    } catch (err: any) {
+      setError(err.message || 'An error occurred during signup')
       setLoading(false)
     }
-    // Navigation will happen via useEffect when user state updates
   }
 
   const handleGoogleSignIn = async () => {

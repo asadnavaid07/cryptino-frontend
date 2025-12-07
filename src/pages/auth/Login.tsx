@@ -5,6 +5,7 @@ import { FcGoogle } from 'react-icons/fc'
 import { SiApple } from 'react-icons/si'
 import { FaTelegram } from 'react-icons/fa'
 import { useAuth } from '../../hooks/useAuth'
+import { supabase } from '../../lib/supabase'
 
 export default function Login() {
   const [email, setEmail] = useState('')
@@ -21,21 +22,58 @@ export default function Login() {
   useEffect(() => {
     if (user) {
       navigate('/')
+      // Hard refresh to ensure all data loads correctly
+      window.location.reload()
     }
   }, [user, navigate])
+  
+  // Watch for user state changes after login
+  useEffect(() => {
+    if (user && !loading) {
+      // User is logged in and loading is done, navigate to home
+      navigate('/')
+      // Hard refresh to ensure all data loads correctly
+      window.location.reload()
+    }
+  }, [user, loading, navigate])
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault()
     setError('')
     setLoading(true)
 
-    const { error } = await signIn(email, password)
-    
-    if (error) {
-      setError(error.message)
+    try {
+      const { error } = await signIn(email, password)
+      
+      if (error) {
+        setError(error.message)
+        setLoading(false)
+        return
+      }
+
+      // Login successful - check if user is logged in
+      const { data: { session } } = await supabase.auth.getSession()
+      
+      if (session?.user) {
+        // User is logged in
+        // Give the auth context a moment to update, then navigate
+        setLoading(false)
+        
+        // Wait a bit for auth state to propagate through context
+        setTimeout(() => {
+          // Navigate to home and hard refresh to ensure all data loads
+          navigate('/')
+          window.location.reload()
+        }, 500)
+      } else {
+        // Should not happen, but handle it just in case
+        setError('Login failed. Please try again.')
+        setLoading(false)
+      }
+    } catch (err: any) {
+      setError(err.message || 'An error occurred during login')
       setLoading(false)
     }
-    // Navigation will happen via useEffect when user state updates
   }
 
   const handleGoogleSignIn = async () => {
